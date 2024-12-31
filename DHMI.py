@@ -64,14 +64,12 @@ class CenterLoss(torch.nn.Module):
 
         # loss2 = (code - self.hash_targets).pow(2).sum() / (self.n_class* self.n_class)
         loss2 = self.criterion_BCE_n(0.5 * (code + 1), 0.5 * (self.hash_targets + 1))
-        # loss_b = self.one_hot.mm(code).pow(2).sum() / self.n_class
 
         re = (torch.sign(code) - code).pow(2).sum() /self.n_class
 
 
         u_L_cov = torch.mm(x_L, x_L.T)
         u_S_cov = torch.mm(code, code.T)
-        # F_ij = torch.softmax(u_F_cov, dim=1)
         L_ij = torch.softmax(u_L_cov, dim=1)
         S_ij = torch.softmax(u_S_cov, dim=1)
 
@@ -79,8 +77,8 @@ class CenterLoss(torch.nn.Module):
         BA = torch.mm(S_ij, L_ij)
         loss3 = self.criterion_MSE(AB, BA)
 
-        loss =loss1 + self.theta*loss2 +self.beta * re + self.gama * loss3#self.alpha * 0 + +
-        return  loss#0.3*center_loss_L+
+        loss =loss1 + self.theta*loss2 +self.beta * re + self.gama * loss3
+        return  loss
 
     def get_hash_targets(self, n_class, bit):
         H_K = hadamard(bit)
@@ -289,7 +287,7 @@ class DHMILoss(torch.nn.Module):
 
         Q_loss_L = (u_L.abs() - 1).pow(2).mean()
         Q_loss_S = (u_S.abs() - 1).pow(2).mean()
-        return  0.5*center_loss_L+center_loss_S+loss_KL+ config["lambda"] * (Q_loss_L+Q_loss_S)#0.3*center_loss_L+
+        return  0.5*center_loss_L+center_loss_S+loss_KL+ config["lambda"] * (Q_loss_L+Q_loss_S)
 
     def label2center(self, y):
         if self.is_single_label:
