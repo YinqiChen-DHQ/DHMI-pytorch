@@ -1,5 +1,4 @@
-# DHMI-pytorch
-(ESWA2025)_Deep Hashing with Mutual Information: A Comprehensive Strategy for Image Retrieval.
+# Deep Hashing with Mutual Information: A Comprehensive Strategy for Image Retrieval
 
 Pytorch Implementation of DHMI. 
 
