@@ -4,6 +4,11 @@ Pytorch Implementation of DHMI.
 
 based on: https://github.com/chrisbyd/DeepHash-pytorch/tree/master?tab=readme-ov-file
 
+Paper link:
+```
+https://www.sciencedirect.com/science/article/abs/pii/S0957417424027477
+```
+
 If you find this repo useful, please consider citing:
 
 ```
